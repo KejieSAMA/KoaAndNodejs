@@ -9,7 +9,6 @@ const router = new Router({
 // 注册请求
 router.post('/register',register)
 
-
 // 登录请求
 router.post('/login',login)
 

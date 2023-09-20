@@ -1,7 +1,20 @@
-class UserServer{
-    async createUser(user_name,password){
-        console.log(`name:${user_name} password:${password}`)
-        return '写入数据成功'
+const User = require('../model/use.model')
+
+class UserServer {
+    async createUser(user_name, password) {
+
+        const res = await User.create({ user_name, password })
+
+        return res.dataValues
+    }
+    async getUser(user_name) {
+        const res = await User.findOne({
+            where: {
+                user_name: user_name
+            }
+        })
+
+        return res ? res.dataValues : null
     }
 }
 
