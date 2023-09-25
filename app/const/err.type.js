@@ -13,5 +13,25 @@ module.exports = {
         code: '10003',
         message: '用户注册错误',
         result: '',
+    },
+    userNoExited: {
+        code: '10004',
+        message: '用户名不存在',
+        result: '',
+    },
+    userLoginError: {
+        code: '10005',
+        message: '登录失败',
+        result: '',
+    },
+    userPsdError: {
+        code: '10006',
+        message: '用户密码错误',
+        result: '',
+    },
+    tokenExpiredError:{
+        code: '10101',
+        message: 'token已过期',
+        result: '',
     }
 }

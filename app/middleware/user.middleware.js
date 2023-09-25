@@ -1,7 +1,7 @@
 const bcrypt = require('bcryptjs')
 
 const { getUser } = require('../service/user.service')
-const { userFormateError, userAlreadyExited } = require('../const/err.type')
+const { userFormateError, userAlreadyExited, userNoExited, userLoginError, userPsdError } = require('../const/err.type')
 
 const userValidator = async (ctx, next) => {
     const { user_name, password } = ctx.request.body
@@ -33,8 +33,28 @@ const cryptPsd = async (ctx, next) => {
     await next()
 }
 
+const verifyLogin = async (ctx, next) => {
+    const { user_name, password } = ctx.request.body
+    try {
+        const res = await getUser(user_name)
+        if (!res) {
+            console.error('用户名不存在', ctx.request.body)
+            return ctx.app.emit('error', userNoExited, ctx)
+        }
+        if (!bcrypt.compareSync(password, res.password)) {
+            return ctx.app.emit('error', userPsdError, ctx)
+        }
+    } catch (error) {
+        console.log(error)
+        return ctx.app.emit('error', userLoginError, ctx)
+    }
+
+    await next()
+}
+
 module.exports = {
     userValidator,
     verifyUser,
-    cryptPsd
+    cryptPsd,
+    verifyLogin
 }
