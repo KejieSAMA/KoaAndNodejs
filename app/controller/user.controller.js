@@ -1,4 +1,4 @@
-const { createUser } = require('../service/user.service')
+const { createUser, upUserDate } = require('../service/user.service')
 const jwt = require('jsonwebtoken')
 
 
@@ -30,8 +30,6 @@ class UserController {
     async login(ctx, next) {
         const { user_name } = ctx.request.body
 
-        //1.获取用户信息(token的payload记录 id user_name is_admin?)
-
         try {
             const res = await getUser(user_name)
             const { password, ...resUser } = res
@@ -46,6 +44,24 @@ class UserController {
             console.error('用户登录失败', error)
         }
         console.log('running api => /users/login')
+    }
+    async changePsd(ctx, next) {
+        const id = ctx.state.user.id
+        const Psd = ctx.request.body.password
+        try {
+            const res = await upUserDate(id, Psd)
+            ctx.body = {
+                code: 0,
+                message: '修改密码成功',
+                result: {
+
+                }
+            }
+        } catch (error) {
+            console.log('密码修改失败', error)
+
+        }
+        console.log('running api => /users/cPsd')
     }
 }
 

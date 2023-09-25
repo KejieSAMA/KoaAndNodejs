@@ -9,7 +9,7 @@ module.exports = {
         message: '用户名已存在',
         result: '',
     },
-    userRegisterError:{
+    userRegisterError: {
         code: '10003',
         message: '用户注册错误',
         result: '',
@@ -29,9 +29,14 @@ module.exports = {
         message: '用户密码错误',
         result: '',
     },
-    tokenExpiredError:{
+    tokenExpiredError: {
         code: '10101',
         message: 'token已过期',
         result: '',
+    },
+    JsonWebTokenError: {
+        code: '10102',
+        message: 'token无效',
+        result: ''
     }
 }

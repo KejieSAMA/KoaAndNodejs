@@ -16,6 +16,14 @@ class UserServer {
 
         return res ? res.dataValues : null
     }
+    async upUserDate(id, Psd) {
+        const res = User.update({ password: Psd }, {
+            where: {
+                id: id
+            }
+        })
+        return res
+    }
 }
 
 module.exports = new UserServer()

@@ -26,7 +26,7 @@ const verifyUser = async (ctx, next) => {
 
 const cryptPsd = async (ctx, next) => {
     const { password } = ctx.request.body
-
+    
     const salt = bcrypt.genSaltSync(10)
     const hash = bcrypt.hashSync(password, salt)
     ctx.request.body.password = hash
@@ -52,9 +52,19 @@ const verifyLogin = async (ctx, next) => {
     await next()
 }
 
+const verifyChangePsd = async (ctx, next) => {
+    const { oldPassword } = ctx.request.body
+    if (!bcrypt.compareSync(oldPassword, ctx.state.user.password)) {
+        return ctx.app.emit('error', userPsdError, ctx)
+    }
+
+    await next()
+}
+
 module.exports = {
     userValidator,
     verifyUser,
     cryptPsd,
-    verifyLogin
+    verifyLogin,
+    verifyChangePsd
 }
