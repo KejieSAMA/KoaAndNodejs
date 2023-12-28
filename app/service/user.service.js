@@ -13,7 +13,7 @@ class UserServer {
                 user_name: user_name
             }
         })
-
+        
         return res ? res.dataValues : null
     }
     async upUserDate(id, Psd) {

@@ -38,5 +38,15 @@ module.exports = {
         code: '10102',
         message: 'token无效',
         result: ''
+    },
+    movieAlreadExited:{
+        code: '30001',
+        message: '电影已存在',
+        result: ''
+    },
+    movieNotExited:{
+        code: '30001',
+        message: '电影不存在',
+        result: ''
     }
 }

@@ -1,8 +1,6 @@
-const { createUser, upUserDate } = require('../service/user.service')
+const { createUser, upUserDate,getUser } = require('../service/user.service')
 const jwt = require('jsonwebtoken')
 
-
-const { getUser } = require('../service/user.service')
 const { JWT_SECRET } = require('../../config/config.default')
 
 const { userRegisterError } = require('../const/err.type')
@@ -62,6 +60,20 @@ class UserController {
 
         }
         console.log('running api => /users/cPsd')
+    }
+    async getUserInfo(ctx, next) {
+        const { user_name } = ctx.request.body
+        try {
+            const res = await getUser(user_name)
+            if(!(res ? 1:0)){
+                ctx.body = "null"
+                return
+            }
+            ctx.body = res
+        } catch (error) {
+            
+        }
+        console.log('running api => users/getUserInfo')
     }
 }
 
