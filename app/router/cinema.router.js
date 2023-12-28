@@ -1,7 +1,7 @@
 const Router = require("koa-router")
 
 const { addCinema, getCinemaInfo } = require('../controller/cinema.controller')
-const { getScheduleInfo } = require('../controller/movieSchedule.controller')
+const { getScheduleInfo,changeScheduleInfo } = require('../controller/movieSchedule.controller')
 
 const router = new Router({
     prefix: '/cinema'
@@ -27,5 +27,8 @@ router.post('/getCinemaInfo', getCinemaInfo)
 
 //查询某个电影场次信息
 router.post('/getSchedule',getScheduleInfo)
+
+//修改某个电影场次座位信息
+router.post('/changeScheduleInfo',changeScheduleInfo)
 
 module.exports = router;

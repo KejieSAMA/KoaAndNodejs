@@ -17,6 +17,16 @@ class ScheduleServe {
 
         return res.dataValues
     }
+    async changeSeat({ hashID, SeatInfo }) {
+        const res = await movieSchedule.update({
+            seatInfo: SeatInfo
+        }, {
+            where: {
+                hashID: hashID
+            }
+        })
+        return res.dataValues
+    }
 }
 
 module.exports = new ScheduleServe()
